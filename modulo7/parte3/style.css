@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #24292e;
+}
+
+#novaTarefa {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#btnAdicionar {
+  padding: 10px 16px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #0366d6;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#btnAdicionar:hover {
+  background-color: #024a9e;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.descricao {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.concluida {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.btnExcluir {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btnExcluir:hover {
+  background: darkred;
+}
