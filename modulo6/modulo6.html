@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Lista de Tarefas</h1>
+
+  <input type="text" id="descricao" placeholder="Digite uma tarefa...">
+  <button onclick="adicionarTarefa()">Adicionar</button>
+
+  <div id="listaTarefas"></div>
+
+  <script>
+    let tarefas = []
+
+    function adicionarTarefa() {
+      let descricaoInput = document.getElementById("descricao")
+      let descricao = descricaoInput.value.trim()
+
+      if (descricao === "") {
+        alert("Digite uma descrição para a tarefa")
+        return
+      }
+
+      tarefas.push({ descricao: descricao, status: false })
+      descricaoInput.value = ""
+      renderizarTarefas()
+    }
+
+    function alternarStatus(index) {
+      tarefas[index].status = !tarefas[index].status
+      renderizarTarefas()
+    }
+
+    function renderizarTarefas() {
+      let lista = document.getElementById("listaTarefas")
+      lista.innerHTML = ""
+
+      tarefas.forEach((tarefa, index) => {
+        let div = document.createElement("div")
+        div.className = "tarefa"
+
+        let checkbox = document.createElement("input")
+        checkbox.type = "checkbox"
+        checkbox.checked = tarefa.status
+        checkbox.onchange = () => alternarStatus(index)
+
+        let span = document.createElement("span")
+        span.textContent = " " + tarefa.descricao
+        span.className = tarefa.status ? "concluida" : "naoConcluida"
+
+        div.appendChild(checkbox)
+        div.appendChild(span)
+        lista.appendChild(div)
+      })
+    }
+  </script>
+</body>
+</html>

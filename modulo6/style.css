@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f4f6f9;
+  color: #333;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #222;
+}
+
+#descricao {
+  padding: 10px;
+  width: 65%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+#descricao:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #007BFF;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+#listaTarefas {
+  margin-top: 25px;
+  text-align: left;
+}
+
+.tarefa {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.tarefa input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.naoConcluida {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.concluida {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #888;
+  text-decoration: line-through;
+}
