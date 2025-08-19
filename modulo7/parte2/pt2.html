@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Busca Usuários GitHub</title>
+</head>
+<body>
+  <h1>Buscar Usuários no GitHub</h1>
+  <input type="text" id="campoBusca" placeholder="Digite o nome do usuário...">
+  <button id="btnBuscar">Buscar</button>
+  <ul id="listaUsuarios"></ul>
+
+  <script>
+    const input = document.getElementById("campoBusca");
+    const btnBuscar = document.getElementById("btnBuscar");
+    const lista = document.getElementById("listaUsuarios");
+
+    async function buscarUsuarios() {
+      const termo = input.value.trim();
+      lista.innerHTML = "";
+
+      if (!termo) {
+        lista.innerHTML = "<li>Digite algo para buscar.</li>";
+        return;
+      }
+
+      try {
+        const resposta = await fetch(`https://api.github.com/search/users?q=${termo}`);
+        const dados = await resposta.json();
+
+        if (dados.total_count === 0) {
+          lista.innerHTML = "<li>Não foram encontrados usuários para esta pesquisa.</li>";
+          return;
+        }
+
+        dados.items.forEach(user => {
+          const li = document.createElement("li");
+          li.innerHTML = `<img src=\"${user.avatar_url}\" width=\"40\"> <a href=\"${user.html_url}\" target=\"_blank\">${user.login}</a>`;
+          lista.appendChild(li);
+        });
+      } catch (erro) {
+        lista.innerHTML = "<li>Erro ao buscar usuários.</li>";
+      }
+    }
+
+    btnBuscar.addEventListener("click", buscarUsuarios);
+  </script>
+</body>
+</html>
