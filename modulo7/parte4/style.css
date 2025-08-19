@@ -1,0 +1,97 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #ffffff;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+}
+
+textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1da1f2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0d8ddb;
+}
+
+main {
+  margin-top: 100px; /* espaço pro header fixo */
+  padding: 20px;
+}
+
+#feed {
+  list-style: none;
+  padding: 0;
+}
+
+.post {
+  background: #fff;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-header img.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-text {
+  margin-bottom: 10px;
+}
+
+.post img.cat {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #e0245e;
+  font-weight: bold;
+}
+
+.like-btn:hover {
+  text-decoration: underline;
+}
