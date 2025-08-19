@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Curtidas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card" role="main">
+    <h1>Quem curtiu?</h1>
+    <p class="sub">Digite um nome e clique em <strong>Curtir</strong>. Nomes duplicados são ignorados (checaremos sem diferenciar maiúsculas/minúsculas).</p>
+
+    <div class="row">
+      <label class="visually-hidden" for="nome">Nome</label>
+      <input id="nome" type="text" placeholder="Ex.: Ana Silva" autocomplete="off" />
+      <button id="btnCurtir" type="button">Curtir</button>
+    </div>
+    <div id="msg" class="msg" aria-live="polite"></div>
+
+    <p id="status" class="status" aria-live="polite">Ninguém curtiu</p>
+    <p id="listaDetalhe" class="list" aria-hidden="true"></p>
+
+    <p class="footer">Atalho: pressione <kbd>Enter</kbd> para curtir.</p>
+  </main>
+
+  <script>
+    const nomes = [];
+    const nomesNorm = new Set();
+
+    const $ = (sel) => document.querySelector(sel);
+    const input = $('#nome');
+    const btn = $('#btnCurtir');
+    const status = $('#status');
+    const msg = $('#msg');
+    const listaDetalhe = $('#listaDetalhe');
+
+    function normalizar(str) {
+      return str
+        .normalize('NFKC')
+        .trim()
+        .replace(/\s+/g, ' ')
+        .toLowerCase();
+    }
+
+    function formatarSaida() {
+      const n = nomes.length;
+      if (n === 0) {
+        status.textContent = 'Ninguém curtiu';
+        listaDetalhe.setAttribute('aria-hidden', 'true');
+        listaDetalhe.textContent = '';
+        return;
+      }
+      if (n === 1) {
+        status.textContent = `${nomes[0]} curtiu`;
+      } else if (n === 2) {
+        status.textContent = `${nomes[0]} e ${nomes[1]} curtiram`;
+      } else {
+        status.textContent = `${nomes[0]}, ${nomes[1]} e mais ${n - 2} pessoas curtiram`;
+      }
+
+      listaDetalhe.textContent = `Lista completa: ${nomes.join(', ')}`;
+      listaDetalhe.setAttribute('aria-hidden', 'false');
+    }
+
+    function curtir() {
+      msg.textContent = '';
+      let nome = input.value;
+      const norm = normalizar(nome);
+
+      if (!norm) {
+        msg.textContent = 'Digite um nome válido.';
+        input.focus();
+        return;
+      }
+
+      nome = nome.trim().replace(/\s+/g, ' ').split(' ').map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+
+      if (nomesNorm.has(norm)) {
+        msg.textContent = 'Esse nome já curtiu.';
+        input.select();
+        return;
+      }
+
+      nomes.push(nome);
+      nomesNorm.add(norm);
+      input.value = '';
+      input.focus();
+      formatarSaida();
+    }
+
+    btn.addEventListener('click', curtir);
+    input.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter') {
+        curtir();
+      }
+    });
+
+    formatarSaida();
+  </script>
+</body>
+</html>
